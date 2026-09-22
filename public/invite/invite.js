@@ -151,6 +151,7 @@
   setText('ok-code-hint', copy['code.hint']);
   setText('ok-copy', copy['code.copy']);
   setText('ok-copy-link', copy['link.copy']);
+  setText('legal-note', copy['legal.note']);
   var descEl = document.querySelector('meta[name="description"]');
   if (descEl && copy['doc.desc']) descEl.setAttribute('content', copy['doc.desc']);
   setShareMeta(document.title, copy['doc.desc']);

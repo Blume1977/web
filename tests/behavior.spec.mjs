@@ -1670,6 +1670,31 @@ test.describe('invite and promo landing', () => {
     );
   });
 
+  test('the invite landing carries the advertising and prospectus note in every state', async ({
+    page,
+  }) => {
+    const de =
+      'Dieser Inhalt dient Werbezwecken. Die genehmigten Prospekte und weitere Unterlagen zur RealUnit Schweiz AG sind abrufbar unter: https://realunit.ch/ueber-uns/downloads/ (Schweiz) | https://realunit.de/ueber-uns/downloads/ (Deutschland/EU). Vergangene Wertentwicklung ist kein verlässlicher Indikator für zukünftige Ergebnisse.';
+    const en =
+      'This content is for advertising purposes. The approved prospectuses and further documents on RealUnit Schweiz AG are available at: https://realunit.ch/ueber-uns/downloads/ (Switzerland) | https://realunit.de/ueber-uns/downloads/ (Germany/EU). Past performance is not a reliable indicator of future results.';
+    await page.goto('/invite/AB12CD?mock=1&lang=de');
+    await expect(page.locator('#state-ok')).toBeVisible();
+    await expect(page.locator('#legal-note')).toBeVisible();
+    await expect(page.locator('#legal-note')).toHaveText(de);
+    await expect(page.locator('#legal-note')).not.toContainText('20 REALU');
+    await page.goto('/invite/AB12CD?mock=1&lang=en');
+    await expect(page.locator('#state-ok')).toBeVisible();
+    await expect(page.locator('#legal-note')).toHaveText(en);
+    await page.goto('/invite/AB12CD?mock=invalid&lang=de');
+    await expect(page.locator('#state-invalid')).toBeVisible();
+    await expect(page.locator('#legal-note')).toHaveText(de);
+    await page.goto('/invite?lang=de');
+    await expect(page.locator('#legal-note')).toHaveText(de);
+    await page.goto('/promo/EVT1?mock=1&lang=de');
+    await expect(page.locator('#state-ok')).toBeVisible();
+    await expect(page.locator('#legal-note')).toHaveCount(0);
+  });
+
   test('a blank inviter name uses the fallback body', async ({ page }) => {
     await page.route(REFERRAL_CODE_ENDPOINT, (route) =>
       route.fulfill({
