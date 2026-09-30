@@ -83,6 +83,7 @@
     }
     .step-title + .stores { margin-top: 14px; }
     .step-title + .code-label { margin-top: 14px; }
+    .noscript-note,
     #state-loading,
     #state-invalid,
     #state-unavailable { margin-top: 28px; }
@@ -216,7 +217,7 @@
       </nav>
     </section>
     <noscript>
-      <section>
+      <section class="noscript-note">
         <h2 lang="de">JavaScript ist deaktiviert</h2>
         <p lang="de">
           Diese Seite löst Ihren Code über die RealUnit-App auf und braucht dafür JavaScript.
@@ -235,10 +236,6 @@
         </p>
       </section>
     </noscript>
-    <section id="state-loading" role="status" aria-live="polite" aria-busy="true">
-      <h2 id="loading-title">Promo-Code wird geladen…</h2>
-      <p id="loading-body">Einen Moment bitte.</p>
-    </section>
     <section class="step" id="ok-code-box" aria-labelledby="promo-step2" hidden>
       <h2 class="step-title" id="promo-step2">Schritt 2: App öffnen, neues Wallet erstellen und bei der Registrierung den Code eingeben</h2>
       <div class="code-box">
@@ -252,6 +249,10 @@
         <p class="only-mobile"><a class="btn" id="ok-cta" href="realunit-wallet://open" rel="noopener">In der App öffnen</a></p>
       </div>
       <h2 class="step step-title" id="promo-step3">Schritt 3: RealUnit-Aktientoken kaufen</h2>
+    </section>
+    <section id="state-loading" role="status" aria-live="polite" aria-busy="true">
+      <h2 id="loading-title">Promo-Code wird geladen…</h2>
+      <p id="loading-body">Einen Moment bitte.</p>
     </section>
     <section id="state-ok" hidden role="status" aria-live="polite">
       <h2 id="ok-title" tabindex="-1">Promo-Code</h2>
